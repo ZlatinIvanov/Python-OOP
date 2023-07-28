@@ -14,5 +14,5 @@ class PhotoAlbum:
         pass
 
     def display(self):
-        passe
+        pass
 
