@@ -20,10 +20,28 @@ class PhotoAlbum:
         return cls(pages)
 
     def add_photo(self, label: str):
-        self.photos[self.current_row_index].append(label)
+        if len(self.photos[self.current_row_index]) == 4:
+            self.current_row_index += 1
+        try:
+            self.photos[self.current_row_index].append(label)
+            return f"{label} photo added successfully on page {self.current_row_index + 1}" \
+                   f" slot {len(self.photos[self.current_row_index])}"
+        except IndexError:
+            return "No more free slots"
 
     def display(self):
-        pass
+        res = "-" * 11 + "\n"
+        for page in self.photos:
+            res += " ".join(["[]" for photo_name in page]) + "\n"
+            res += "-" * 11 + "\n"
+        return res
 
-p = PhotoAlbum(2)
-a = 5
+album = PhotoAlbum(2)
+print(album.add_photo("baby"))
+print(album.add_photo("first grade"))
+print(album.add_photo("eight grade"))
+print(album.add_photo("party with friends"))
+print(album.photos)
+print(album.add_photo("prom"))
+print(album.add_photo("wedding"))
+print(album.display())
